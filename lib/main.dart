@@ -1,7 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebaseprueba/firebase_options.dart';
 import 'package:firebaseprueba/pagines/pagina_registre.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  
   runApp(const MainApp());
 }
 
@@ -15,17 +21,4 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
     );
   }
-
-  /*
-1) Node.js instalado
-
-
-2) Ir a firebase Go to console 
-
-3) Create a new project
-
-4) Compilacion 
-
-
-  */
 }

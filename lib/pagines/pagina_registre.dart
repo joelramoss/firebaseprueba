@@ -1,10 +1,15 @@
+import 'package:firebaseprueba/auth/servei_auth.dart';
 import 'package:firebaseprueba/components/boto_auth.dart';
 import 'package:firebaseprueba/components/textFieldreut.dart';
 import 'package:flutter/material.dart';
 
 class PaginaRegistre extends StatelessWidget {
-  ferRegistre() {
-    
+  void ferRegistre() {
+    final ServeiAuth serveiAuth = ServeiAuth();
+    serveiAuth.registreAmbEmailIPasswrd(
+      "j.ramos@gmail.com",
+      "123456",
+    );
   }
   const PaginaRegistre({super.key});
 
@@ -88,7 +93,7 @@ class PaginaRegistre extends StatelessWidget {
                 // text no estas registrado
                 const SizedBox(height: 10),
                 Padding(
-                  padding: EdgeInsets.only(right: 25),
+                  padding: const EdgeInsets.only(right: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -116,7 +121,7 @@ class PaginaRegistre extends StatelessWidget {
 
                 BotoAuth(
                   text: "Registrar",
-                  onTap: ferRegistre(),
+                  onTap: ferRegistre,
                 ),
                 BotoAuth(
                   text: "Logout",

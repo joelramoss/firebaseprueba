@@ -3,6 +3,9 @@ import 'package:firebaseprueba/components/textFieldreut.dart';
 import 'package:flutter/material.dart';
 
 class PaginaRegistre extends StatelessWidget {
+  ferRegistre() {
+    
+  }
   const PaginaRegistre({super.key});
 
   @override
@@ -111,7 +114,16 @@ class PaginaRegistre extends StatelessWidget {
                 ),
                 //Boton de Registro
 
-                const BotoAuth(),
+                BotoAuth(
+                  text: "Registrar",
+                  onTap: ferRegistre(),
+                ),
+                BotoAuth(
+                  text: "Logout",
+                  onTap: (){
+
+                  },
+                ),
               ],
             ),
           ),

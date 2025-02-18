@@ -15,4 +15,17 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
     );
   }
+
+  /*
+1) Node.js instalado
+
+
+2) Ir a firebase Go to console 
+
+3) Create a new project
+
+4) Compilacion 
+
+
+  */
 }

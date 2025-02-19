@@ -16,7 +16,7 @@ class Textfieldreut extends StatelessWidget {
         style: const TextStyle(
           color: Color.fromARGB(255, 154, 69, 0),
         ),
-        controller: TextEditingController(),
+        controller: controller,
         obscureText: isPassword!,
         decoration: InputDecoration(
           enabledBorder: const OutlineInputBorder(

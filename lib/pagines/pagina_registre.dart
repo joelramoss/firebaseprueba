@@ -4,13 +4,25 @@ import 'package:firebaseprueba/components/textFieldreut.dart';
 import 'package:flutter/material.dart';
 
 class PaginaRegistre extends StatelessWidget {
-  void ferRegistre() {
-    final ServeiAuth serveiAuth = ServeiAuth();
-    serveiAuth.registreAmbEmailIPasswrd(
-      "j.ramos@gmail.com",
-      "123456",
-    );
+  void ferRegistre(BuildContext context, String email, String password,
+      String confpass) async {
+    if (password.isEmpty || email.isEmpty) return;
+
+    if (password != confpass) {
+      return;
+    }
+    try {
+      ServeiAuth().registreAmbEmailIPasswrd(email, password);
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: const Text("Error"),
+                content: Text(e.toString()),
+              ));
+    }
   }
+
   const PaginaRegistre({super.key});
 
   @override
@@ -121,13 +133,12 @@ class PaginaRegistre extends StatelessWidget {
 
                 BotoAuth(
                   text: "Registrar",
-                  onTap: ferRegistre,
+                  onTap: () => ferRegistre(
+                      context, TECemail.text, TECpass.text, TECconfPass.text),
                 ),
                 BotoAuth(
                   text: "Logout",
-                  onTap: (){
-
-                  },
+                  onTap: () {},
                 ),
               ],
             ),

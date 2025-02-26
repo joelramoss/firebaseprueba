@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebaseprueba/auth/portal_auth.dart';
 import 'package:firebaseprueba/firebase_options.dart';
-import 'package:firebaseprueba/pagines/pagina_registre.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: PaginaRegistre(),
+      home: PortalAuth(),
       debugShowCheckedModeBanner: false,
     );
   }

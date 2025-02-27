@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:exemple_firebase/auth/servei_auth.dart'; // Asegúrate de importar tu servicio de autenticación
+import 'package:firebaseprueba/auth/servei_auth.dart';
+import 'package:firebaseprueba/chat/servei_chat.dart';
+import 'package:firebaseprueba/pagines/pagina_login.dart';  // Asegúrate de que esta importación esté presente
 
-class PaginaInici extends StatelessWidget {
+
+class PaginaInici extends StatefulWidget {
   const PaginaInici({super.key});
 
-  // Método para manejar la desconexión (cerrar sesión)
-  Future<void> _logout(BuildContext context) async {
-    await ServeiAuth().Ferlogout(); // Llamamos a la función Ferlogout.
-    // Después de cerrar sesión, puedes redirigir a la pantalla de inicio de sesión o mostrar un mensaje.
-    // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PaginaLogin())); // Ejemplo
-  }
+  @override
+  State<PaginaInici> createState() => _PaginaIniciState();
+}
+
+class _PaginaIniciState extends State<PaginaInici> {
+Future<void> _logout() async {
+  await ServeiAuth().Ferlogout();
+  // Asegúrate de pasar una función para ferClic
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => PaginaLogin(ferClic: () {
+      // Definir lo que debe hacer ferClic aquí, por ejemplo, redirigir a la página de inicio de sesión
+      print("Función de registro o login aquí");
+    })),
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +33,35 @@ class PaginaInici extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () async {
-              await _logout(context); // Llamamos al método que gestiona el cierre de sesión.
+              await _logout();
             },
             icon: const Icon(Icons.logout),
           ),
         ],
       ),
-      body: const Center(
-        child: Text("Pagina Inici"),
+      body: StreamBuilder<List<Map<String, dynamic>>>(
+        stream: ServeiChat().getUsaris(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Center(child: Text("Error en el snapshot."));
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text("No hay usuarios disponibles."));
+          }
+          return ListView(
+            children: snapshot.data!.map<Widget>((dadesUsuari) => _construeixUsuari(dadesUsuari)).toList(),
+          );
+        },
       ),
+    );
+  }
+
+  Widget _construeixUsuari(Map<String, dynamic> usuari) {
+    return Text(
+      usuari["email"] ?? "Sin email"
     );
   }
 }

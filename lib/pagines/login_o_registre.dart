@@ -1,4 +1,3 @@
-
 import 'package:firebaseprueba/pagines/pagina_login.dart';
 import 'package:firebaseprueba/pagines/pagina_registre.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,7 @@ class LoginORegistre extends StatefulWidget {
 
 class _LoginORegistreState extends State<LoginORegistre> {
 
-  bool mostraPaginaLogin = true;
+  bool mostraPaginaLogin = false;
   void intercambiarMostrarPaginaLogin(){
     mostraPaginaLogin = !mostraPaginaLogin;
   }
